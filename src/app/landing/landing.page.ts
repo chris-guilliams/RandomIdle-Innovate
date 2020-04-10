@@ -105,8 +105,6 @@ export class LandingPage implements OnInit {
       repeat: -1
     };
     scene.anims.create(rotateConfig);
-
-    scene.add.sprite(100, 100, 'coin').play('rotateAnimation');
   }
 
   updateScene(scene: Phaser.Scene) {
@@ -115,6 +113,12 @@ export class LandingPage implements OnInit {
       const x = this.randomNumberService.getRandomNumber(0, this.height);
       const y = this.randomNumberService.getRandomNumber(0, this.width);
       let coin = scene.add.sprite(x, y, 'coin').play('rotateAnimation');
+      coin.setInteractive();
+      coin.on('pointerdown', () => {
+        this.statisticsService.addCreds(credsToAdd);
+        this.currentCreds = this.statisticsService.currentCreds;
+        coin.destroy();
+      });
     }
   }
 }
