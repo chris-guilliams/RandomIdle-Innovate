@@ -3,24 +3,43 @@ import { RandomNumberService } from '../services/random-number.service';
 import { ToastController } from '@ionic/angular';
 import { createAnimation } from '@ionic/core';
 import { StatisticsService } from '../services/statistics.service';
+import Phaser from 'phaser';
+import { MainScene } from '../models/MainScene';
 
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.page.html',
-  styleUrls: ['./landing.page.scss'],
+  styleUrls: ['./landing.page.scss']
 })
 export class LandingPage implements OnInit {
   private min = -1;
   private max = 2;
   currentCreds: number;
+  game: Phaser.Game;
+  config: Phaser.Types.Core.GameConfig;
 
   constructor(
     private randomNumberService: RandomNumberService,
     private statisticsService: StatisticsService,
-    private toastController: ToastController) { }
+    private toastController: ToastController) {
+      this.config = {
+        type: Phaser.AUTO,
+        height: 500,
+        width: 300,
+        scene: [ MainScene ],
+        parent: 'game-container',
+        physics: {
+          default: 'arcade',
+          arcade: {
+            gravity: { y: 100 }
+          }
+        }
+      };
+    }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.currentCreds = this.statisticsService.currentCreds;
+    this.game = new Phaser.Game(this.config);
   }
 
   async gamble() {
@@ -58,5 +77,4 @@ export class LandingPage implements OnInit {
       await this.presentEarningsToast(earnings);
     }
   }
-
 }
