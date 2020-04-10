@@ -60,7 +60,6 @@ export class LandingPage implements OnInit {
     this.statisticsService.addCreds(earnings);
     this.currentCreds = this.statisticsService.currentCreds;
     this.credsToAdd.push(earnings);
-    console.log(this.credsToAdd);
     await this.showEarningsToast(earnings);
   }
 
