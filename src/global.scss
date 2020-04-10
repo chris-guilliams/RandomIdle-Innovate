@@ -24,3 +24,18 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.earnings-toast {
+  --width: fit-content;
+
+  &.positive {
+    --color: var(--ion-color-success);
+  }
+
+  &.negative {
+    --color: var(--ion-color-danger);
+  }
+
+  transform: translate3d(0px, -7%, 0px);
+  bottom: -40px;
+}

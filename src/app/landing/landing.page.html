@@ -1,9 +1,16 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>landing</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Home</ion-title>
   </ion-toolbar>
 </ion-header>
+
 
 <ion-content>
 
 </ion-content>
+<ion-footer>
+  <ion-button expand="full" (click)="gamble()">Gamble</ion-button>
+</ion-footer>
