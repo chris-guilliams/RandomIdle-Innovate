@@ -7,7 +7,7 @@ export class MainScene extends Phaser.Scene {
     console.log('create method');
     const rotateConfig = {
       key: 'rotateAnimation',
-      frames: this.anims.generateFrameNumbers('coin'),
+      frames: this.anims.generateFrameNumbers('coin', {}),
       frameRate: 6,
       repeat: -1
     };
