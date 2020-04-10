@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "randomidle-innovate"
+    "default": "randomidle-innovate",
+    "randomIdle": "randomidle-innovate"
   }
 }

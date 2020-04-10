@@ -9,6 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RandomNumberService } from './services/random-number.service';
+import { StatisticsService } from './services/statistics.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +23,8 @@ import { RandomNumberService } from './services/random-number.service';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    RandomNumberService
+    RandomNumberService,
+    StatisticsService
   ],
   bootstrap: [AppComponent]
 })

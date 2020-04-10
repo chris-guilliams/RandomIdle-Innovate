@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RandomNumberService } from '../services/random-number.service';
 import { ToastController } from '@ionic/angular';
 import { createAnimation } from '@ionic/core';
+import { StatisticsService } from '../services/statistics.service';
 
 @Component({
   selector: 'app-landing',
@@ -9,26 +10,43 @@ import { createAnimation } from '@ionic/core';
   styleUrls: ['./landing.page.scss'],
 })
 export class LandingPage implements OnInit {
+  private min = -1;
+  private max = 2;
+  currentCreds: number;
 
   constructor(
     private randomNumberService: RandomNumberService,
+    private statisticsService: StatisticsService,
     private toastController: ToastController) { }
 
   async ngOnInit() {
+    this.currentCreds = this.statisticsService.currentCreds;
   }
 
   async gamble() {
-    let earnings = this.randomNumberService.getRandomNumber(-50, 50);
+    const earnings = this.randomNumberService.getRandomNumber(this.min, this.max);
+    this.statisticsService.addCreds(earnings);
+    this.currentCreds = this.statisticsService.currentCreds;
     await this.showEarningsToast(earnings);
   }
 
   async presentEarningsToast(earnings: number) {
-    const cssClasses = 'earnings-toast' + ((earnings > 0) ? ' positive' : ' negative');
-    const earningsMessage = ((earnings > 0) ? ' Earned: ' : ' Lost: ') + earnings + ' creds';
+    let cssClasses = 'earnings-toast';
+    let toastMessage = '';
+    if (earnings === 0) {
+      toastMessage = 'Gained no creds';
+    } else if (earnings > 0) {
+      cssClasses += ' positive';
+      toastMessage = 'Gained: ' + earnings + ' creds';
+    } else {
+      cssClasses += ' negative';
+      toastMessage = 'Lost: ' + Math.abs(earnings) + ' creds';
+    }
     const toast = await this.toastController.create({
-      message: earningsMessage,
+      message: toastMessage,
       position: 'bottom',
-      cssClass: cssClasses
+      cssClass: cssClasses,
+      duration: 150
     });
     toast.present();
   }
