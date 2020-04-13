@@ -9,7 +9,7 @@ export class StatisticsService {
   private _totalCredsLost = 0;
   private _netCreds = 0;
   private _minCreditsPerGamble = -1;
-  private _maxCreditsPerGable = 2;
+  private _maxCreditsPerGamble = 2;
 
   constructor() { }
 
