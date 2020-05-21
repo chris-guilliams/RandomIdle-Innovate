@@ -56,7 +56,11 @@ export class LandingPage implements OnInit {
 
   async showEarningsToast(earnings: number) {
     try {
-      this.toastController.dismiss();
+      await this.toastController.dismiss();
+    } catch (e) {
+      if (e !== 'overlay does not exist') {
+        throw new Error(e);
+      }
     } finally {
       await this.presentEarningsToast(earnings);
     }
