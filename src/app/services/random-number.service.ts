@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 declare let BigNumber;
+
 @Injectable({
   providedIn: 'root'
 })
