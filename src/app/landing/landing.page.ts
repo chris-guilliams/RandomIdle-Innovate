@@ -37,7 +37,7 @@ export class LandingPage implements OnInit {
     let cssClasses = 'earnings-toast';
     let toastMessage = '';
     if (earnings === 0) {
-      toastMessage = 'Gained no creds';
+      toastMessage = 'Gained: 0 creds';
     } else if (earnings > 0) {
       cssClasses += ' positive';
       toastMessage = 'Gained: ' + earnings + ' creds';

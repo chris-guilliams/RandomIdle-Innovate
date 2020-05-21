@@ -27,9 +27,10 @@
 
 .earnings-toast {
   --width: fit-content;
-  --background: var(--ion-color-light);
+  --background: var(--ion-color-dark-shade);
   transform: translate3d(0px, -7%, 0px);
   bottom: -40px;
+  --color: var(--ion-color-light);
 
   &.positive {
     --color: var(--ion-color-success);
@@ -38,4 +39,12 @@
   &.negative {
     --color: var(--ion-color-danger);
   }
+}
+
+ion-content {
+  --background: var(--ion-color-dark-tint);
+}
+
+.list-ios {
+  --background: var(--ion-item-background, var(--ion-color-dark-tint));
 }
