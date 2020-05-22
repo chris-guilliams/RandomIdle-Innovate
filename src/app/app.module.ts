@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RandomNumberService } from './services/random-number.service';
 import { StatisticsService } from './services/statistics.service';
-import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
