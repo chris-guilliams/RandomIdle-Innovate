@@ -1,0 +1,64 @@
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the master branch
+  push:
+    branches:
+      - master
+
+jobs:
+  my_first_job:
+    name: My first job
+  my_second_job:
+    name: My second job
+
+- name: Firebase GitHub Action
+  uses: pizzafox/firebase-action@1.0.7
+  env:
+    PROJECT_ID: "randomidle-innovate"
+    FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+  with:
+    args: deploy
+
+name: Build
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: npm install and ionic build prod
+        run: |
+          npm ci
+          npm run build:ci
+      
+      - name: Firebase GitHub Action
+        uses: pizzafox/firebase-action@1.0.7
+        env:
+          PROJECT_ID: "randomidle-innovate"
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        with:
+          args: deploy
+    
+
