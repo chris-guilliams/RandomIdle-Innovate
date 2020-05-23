@@ -1,24 +1,3 @@
-on:
-  # Trigger the workflow on push or pull request,
-  # but only for the master branch
-  push:
-    branches:
-      - master
-
-jobs:
-  my_first_job:
-    name: My first job
-  my_second_job:
-    name: My second job
-
-- name: Firebase GitHub Action
-  uses: pizzafox/firebase-action@1.0.7
-  env:
-    PROJECT_ID: "randomidle-innovate"
-    FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-  with:
-    args: deploy
-
 name: Build
 on:
   push:
