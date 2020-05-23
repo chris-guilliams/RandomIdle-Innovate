@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RandomNumberService } from '../services/random-number.service';
 import { ToastController } from '@ionic/angular';
 import { createAnimation } from '@ionic/core';
@@ -14,6 +14,8 @@ declare var PIXI: any;
 export class LandingPage implements OnInit {
   private min = -1;
   private max = 3;
+  private canvasHeight = window.screen.height - 44 - 56;
+  private canvasWidth = window.screen.width;
   private credsToAdd: number[] = [];
   public app: any;
   public container: any = new PIXI.Container();
@@ -28,31 +30,22 @@ export class LandingPage implements OnInit {
   ngOnInit() {
     this.currentCreds = this.statisticsService.currentCreds;
 
-    this.app = new PIXI.Application({width: window.screen.width, height: window.screen.height - 44 - 56});
+    this.app = new PIXI.Application({width: this.canvasWidth, height: this.canvasHeight});
     const leftPanel = document.getElementById('landing-page').appendChild(this.app.view);
 
-    const style = new PIXI.TextStyle({
-      fontFamily: 'Arial',
-      fontSize: 36,
-      fontStyle: 'italic',
-      fontWeight: 'bold',
-      fill: ['#ffffff', '#00ff99'], // gradient
-      stroke: '#4a1850',
-      strokeThickness: 5,
-      dropShadow: true,
-      dropShadowColor: '#000000',
-      dropShadowBlur: 4,
-      dropShadowAngle: Math.PI / 6,
-      dropShadowDistance: 6,
-      wordWrap: true,
-      wordWrapWidth: 440,
-    });
-    const basicText = new PIXI.Text('RandomIdle', style);
-    basicText.x = 30;
-    basicText.y = 90;
+    PIXI.Loader.shared.add('../assets/sprites/coin/coin_spritesheet.json').load();
+  }
 
-    this.app.stage.addChild(this.container);
-    this.container.addChild(basicText);
+  createCoin(x: number, y: number, value: number) {
+    const coinSheet = PIXI.Loader.shared.resources['../assets/sprites/coin/coin_spritesheet.json'].spritesheet;
+    // create an animated sprite
+    const animatedCoin = new PIXI.AnimatedSprite(coinSheet.animations.tile);
+    animatedCoin.x = x;
+    animatedCoin.y = y;
+    // set speed, start playback and add it to the stage
+    animatedCoin.animationSpeed = 0.1;
+    animatedCoin.play();
+    this.app.stage.addChild(animatedCoin);
   }
 
   async gamble() {
@@ -61,6 +54,9 @@ export class LandingPage implements OnInit {
     this.currentCreds = this.statisticsService.currentCreds;
     this.credsToAdd.push(earnings);
     await this.showEarningsToast(earnings);
+    const x = this.randomNumberService.getRandomNumber(0, this.canvasWidth);
+    const y = this.randomNumberService.getRandomNumber(0, this.canvasHeight);
+    this.createCoin(x, y, 50);
   }
 
   async presentEarningsToast(earnings: number) {

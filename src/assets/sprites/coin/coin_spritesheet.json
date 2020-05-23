@@ -1,0 +1,104 @@
+{
+	"frames": {
+		"tile000.png": {
+			"frame": {
+				"x": 0,
+				"y": 0,
+				"w": 22,
+				"h": 22
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 22,
+				"h": 22
+			},
+			"sourceSize": {
+				"w": 22,
+				"h": 22
+			}
+		},
+		"tile001.png": {
+			"frame": {
+				"x": 22,
+				"y": 0,
+				"w": 22,
+				"h": 22
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 22,
+				"h": 22
+			},
+			"sourceSize": {
+				"w": 22,
+				"h": 22
+			}
+		},
+		"tile002.png": {
+			"frame": {
+				"x": 44,
+				"y": 0,
+				"w": 22,
+				"h": 22
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 22,
+				"h": 22
+			},
+			"sourceSize": {
+				"w": 22,
+				"h": 22
+			}
+		},
+		"tile003.png": {
+			"frame": {
+				"x": 66,
+				"y": 0,
+				"w": 22,
+				"h": 22
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 22,
+				"h": 22
+			},
+			"sourceSize": {
+				"w": 22,
+				"h": 22
+			}
+		}
+	},
+	"animations": {
+		"tile": [
+			"tile000.png",
+			"tile001.png",
+			"tile002.png",
+			"tile003.png"
+		]
+	},
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"image": "coin_spritesheet.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 88,
+			"h": 22
+		},
+		"scale": "1",
+		"smartupdate": "$TexturePacker:SmartUpdate:4a638d1616ee85be2edec26042be493f:a9513cb488c08f30003e51ade860f16a:3896e80cac661926b8159cdbbf70d89b$"
+	}
+}
