@@ -18,7 +18,6 @@ export class LandingPage implements OnInit {
   private canvasWidth = window.screen.width;
   private credsToAdd: number[] = [];
   public app: any;
-  public container: any = new PIXI.Container();
   public currentCreds: number;
 
   constructor(
@@ -33,11 +32,11 @@ export class LandingPage implements OnInit {
     this.app = new PIXI.Application({width: this.canvasWidth, height: this.canvasHeight});
     const leftPanel = document.getElementById('landing-page').appendChild(this.app.view);
 
-    PIXI.Loader.shared.add('../assets/sprites/coin/coin_spritesheet.json').load();
+    this.app.loader.add('../assets/sprites/coin/coin_spritesheet.json').load();
   }
 
   createCoin(x: number, y: number, value: number) {
-    const coinSheet = PIXI.Loader.shared.resources['../assets/sprites/coin/coin_spritesheet.json'].spritesheet;
+    const coinSheet = this.app.loader.resources['../assets/sprites/coin/coin_spritesheet.json'].spritesheet;
     // create an animated sprite
     const animatedCoin = new PIXI.AnimatedSprite(coinSheet.animations.tile);
     animatedCoin.x = x;

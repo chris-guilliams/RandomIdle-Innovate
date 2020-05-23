@@ -130,7 +130,7 @@ ion-menu.ios, ion-menu.md {
     }
   }
 
-  ion-item {
+  ion-item, ion-item.ios {
     border-radius: 0px;
     border-bottom: solid 1px var(--ion-color-dark-tint);
   }
