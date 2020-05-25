@@ -31,3 +31,5 @@ npm-debug.log*
 /www
 /.history
 /.firebase
+# ignore resources until developing for app instead of PWA
+/resources

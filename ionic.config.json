@@ -1,5 +1,7 @@
 {
   "name": "RandomIdle",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
