@@ -12,8 +12,10 @@ declare var PIXI: any;
   styleUrls: ['./landing.page.scss']
 })
 export class LandingPage implements OnInit {
-  private min = -1;
+  private min = -3;
   private max = 3;
+
+  // TODO: Handle Android and iOS height seperately
   private canvasHeight = window.screen.height - 44 - 56;
   private canvasWidth = window.screen.width;
   public app: any;
@@ -39,7 +41,7 @@ export class LandingPage implements OnInit {
     // create an animated sprite
     const animatedCoin = new PIXI.AnimatedSprite(coinSheet.animations.tile);
     animatedCoin.interactive = true;
-    animatedCoin.buttonMode = true;
+    animatedCoin.buttonMode = true;4
     animatedCoin.hitArea = new PIXI.Rectangle(-40, -40, 80, 80);
     animatedCoin.on('pointertap', async () => {
       animatedCoin.destroy();
@@ -57,14 +59,19 @@ export class LandingPage implements OnInit {
     this.app.stage.addChild(animatedCoin);
   }
 
+  // TODO: Add cooldown between gambling
   async gamble() {
     const earnings = this.randomNumberService.getRandomNumber(this.min, this.max);
     this.statisticsService.addCreds(earnings);
     this.currentCreds = this.statisticsService.currentCreds;
-    await this.showEarningsToast(earnings);
+    if (earnings !== 0) {
+      this.showEarningsToast(earnings);
+    }
 
     // TODO: You shouldn't be able to get your full earnings back
-    this.createCoin(Math.abs(earnings));
+    if (earnings > 0) {
+      this.createCoin(Math.abs(earnings));
+    }
   }
 
   async presentEarningsToast(earnings: number) {
