@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { UpgradesPage } from './upgrades.page';
+import { UpgradeComponent } from '../components/upgrade/upgrade.component';
 
 describe('UpgradesPage', () => {
   let component: UpgradesPage;
@@ -9,7 +10,10 @@ describe('UpgradesPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UpgradesPage ],
+      declarations: [ 
+        UpgradesPage,
+        UpgradeComponent
+      ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
