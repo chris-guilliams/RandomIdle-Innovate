@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { UpgradesPageRoutingModule } from './upgrades-routing.module';
 
 import { UpgradesPage } from './upgrades.page';
+import { UpgradeComponent } from '../components/upgrade/upgrade.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,9 @@ import { UpgradesPage } from './upgrades.page';
     IonicModule,
     UpgradesPageRoutingModule
   ],
-  declarations: [UpgradesPage]
+  declarations: [
+    UpgradesPage,
+    UpgradeComponent
+  ]
 })
 export class UpgradesPageModule {}

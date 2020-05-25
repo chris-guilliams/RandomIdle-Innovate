@@ -1,4 +1,4 @@
 export enum Upgrades {
-    minClick,
-    maxClick
+    minGamble,
+    maxGamble
 }

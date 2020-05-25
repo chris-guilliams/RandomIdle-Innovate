@@ -12,6 +12,7 @@ declare var PIXI: any;
   styleUrls: ['./landing.page.scss']
 })
 export class LandingPage implements OnInit {
+  // TODO: Break into state service???
   private min = -3;
   private max = 3;
 
@@ -31,7 +32,7 @@ export class LandingPage implements OnInit {
     this.currentCreds = this.statisticsService.currentCreds;
 
     this.app = new PIXI.Application({width: this.canvasWidth, height: this.canvasHeight});
-    const leftPanel = document.getElementById('landing-page').appendChild(this.app.view);
+    const canvas = document.getElementById('landing-page').appendChild(this.app.view);
 
     this.app.loader.add('../assets/sprites/coin/coin_spritesheet.json').load();
   }
