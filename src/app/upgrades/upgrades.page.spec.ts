@@ -3,6 +3,11 @@ import { IonicModule } from '@ionic/angular';
 
 import { UpgradesPage } from './upgrades.page';
 import { UpgradeComponent } from '../components/upgrade/upgrade.component';
+import { Storage } from '@ionic/storage';
+
+const storageIonicMock: any = {
+  get: () => new Promise<any>((resolve, reject) => resolve('As2342fAfgsdr'))
+};
 
 describe('UpgradesPage', () => {
   let component: UpgradesPage;
@@ -10,9 +15,15 @@ describe('UpgradesPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ 
+      declarations: [
         UpgradesPage,
         UpgradeComponent
+      ],
+      providers: [
+        {
+          provide: Storage,
+          useValue: storageIonicMock
+        }
       ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();

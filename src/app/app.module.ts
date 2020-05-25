@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { RandomNumberService } from './services/random-number.service';
 import { StatisticsService } from './services/statistics.service';
 import { GameModelService } from './services/game-model.service';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { GameModelService } from './services/game-model.service';
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
     AppRoutingModule
   ],
   providers: [

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { StatisticsService } from '../services/statistics.service';
 import { GameModelService } from '../services/game-model.service';
 import { Observable } from 'rxjs';
 
@@ -11,7 +10,7 @@ import { Observable } from 'rxjs';
 export class UpgradesPage implements OnInit {
   public currentCreds: Observable<number>;
 
-  constructor(private gameModelService: GameModelService) { 
+  constructor(private gameModelService: GameModelService) {
     this.currentCreds = this.gameModelService.creds$;
   }
 

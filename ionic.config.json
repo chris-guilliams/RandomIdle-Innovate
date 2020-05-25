@@ -1,7 +1,8 @@
 {
   "name": "RandomIdle",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular"
 }

@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, fromEventPattern } from 'rxjs';
+import { Plugins } from '@capacitor/core';
+import { Storage } from '@ionic/storage';
+import { SaveState } from '../models/save-state';
+const { App, BackgroundTask } = Plugins;
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +24,23 @@ export class GameModelService {
   readonly maxGambleLoss$ = this._maxGambleLoss.asObservable();
   readonly maxGambleGain$ = this._maxGambleGain.asObservable();
   readonly maxWager$ = this._maxWager.asObservable();
+
+  constructor(private storage: Storage) {
+    App.addListener('appStateChange', (state) => {
+      if (!state.isActive) {
+        // The app has become inactive. We should check if we have some work left to do, and, if so,
+        // execute a background task that will allow us to finish that work before the OS
+        // suspends or terminates our app:
+
+        const taskId = BackgroundTask.beforeExit(async () => {
+          await this.save();
+          BackgroundTask.finish({
+            taskId
+          });
+        });
+      }
+    });
+  }
 
   get creds(): number {
     return this._creds.getValue();
@@ -59,5 +80,19 @@ export class GameModelService {
 
   set maxWager(val: number) {
     this._maxWager.next(val);
+  }
+
+  private async save() {
+    console.log('save');
+    await this.storage.set('save', new SaveState(this.creds));
+  }
+
+  private async load() {
+    console.log('load');
+    
+    const saveState: SaveState = await this.storage.get('save');
+    if (saveState) {
+      this.creds = saveState.creds;
+    }
   }
 }

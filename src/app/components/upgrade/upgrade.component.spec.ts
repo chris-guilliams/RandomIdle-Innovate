@@ -10,7 +10,9 @@ describe('UpgradeComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ UpgradeComponent ],
-      imports: [IonicModule.forRoot()]
+      imports: [
+        IonicModule.forRoot()
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(UpgradeComponent);
