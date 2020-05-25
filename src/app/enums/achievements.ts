@@ -1,4 +1,4 @@
-export enum Achievements {
+export const enum Achievements {
     numClicks,
     creditsGained,
     creditsLost,

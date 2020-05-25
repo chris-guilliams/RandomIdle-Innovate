@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RandomNumberService } from '../services/random-number.service';
 import { ToastController } from '@ionic/angular';
-import { createAnimation } from '@ionic/core';
-import { StatisticsService } from '../services/statistics.service';
+import { GameModelService } from '../services/game-model.service';
+import { Observable } from 'rxjs';
 
 declare var PIXI: any;
 
@@ -20,16 +20,16 @@ export class LandingPage implements OnInit {
   private canvasHeight = window.screen.height - 44 - 56;
   private canvasWidth = window.screen.width;
   public app: any;
-  public currentCreds: number;
+  public currentCreds: Observable<number>;
 
   constructor(
     private randomNumberService: RandomNumberService,
-    private statisticsService: StatisticsService,
-    private toastController: ToastController) {
+    private toastController: ToastController,
+    private gameModelService: GameModelService) {
+      this.currentCreds = this.gameModelService.creds$;
   }
 
   ngOnInit() {
-    this.currentCreds = this.statisticsService.currentCreds;
 
     this.app = new PIXI.Application({width: this.canvasWidth, height: this.canvasHeight});
     const canvas = document.getElementById('landing-page').appendChild(this.app.view);
@@ -42,12 +42,11 @@ export class LandingPage implements OnInit {
     // create an animated sprite
     const animatedCoin = new PIXI.AnimatedSprite(coinSheet.animations.tile);
     animatedCoin.interactive = true;
-    animatedCoin.buttonMode = true;4
+    animatedCoin.buttonMode = true;
     animatedCoin.hitArea = new PIXI.Rectangle(-40, -40, 80, 80);
     animatedCoin.on('pointertap', async () => {
       animatedCoin.destroy();
-      this.statisticsService.addCreds(value);
-      this.currentCreds = this.statisticsService.currentCreds;
+      this.gameModelService.addCreds(value);
       await this.showEarningsToast(value);
     });
     const x = this.randomNumberService.getRandomNumber(15, this.canvasWidth - 15);
@@ -63,8 +62,7 @@ export class LandingPage implements OnInit {
   // TODO: Add cooldown between gambling
   async gamble() {
     const earnings = this.randomNumberService.getRandomNumber(this.min, this.max);
-    this.statisticsService.addCreds(earnings);
-    this.currentCreds = this.statisticsService.currentCreds;
+    this.gameModelService.addCreds(earnings);
     if (earnings !== 0) {
       this.showEarningsToast(earnings);
     }

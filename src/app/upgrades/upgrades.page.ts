@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StatisticsService } from '../services/statistics.service';
+import { GameModelService } from '../services/game-model.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-upgrades',
@@ -7,12 +9,12 @@ import { StatisticsService } from '../services/statistics.service';
   styleUrls: ['./upgrades.page.scss'],
 })
 export class UpgradesPage implements OnInit {
-  public currentCreds: number;
+  public currentCreds: Observable<number>;
 
-  constructor(private statisticsService: StatisticsService) { }
-
-  ngOnInit() {
-    this.currentCreds = this.statisticsService.currentCreds;
+  constructor(private gameModelService: GameModelService) { 
+    this.currentCreds = this.gameModelService.creds$;
   }
+
+  ngOnInit() {}
 
 }

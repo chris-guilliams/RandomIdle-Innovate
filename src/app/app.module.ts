@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RandomNumberService } from './services/random-number.service';
 import { StatisticsService } from './services/statistics.service';
+import { GameModelService } from './services/game-model.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { StatisticsService } from './services/statistics.service';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     RandomNumberService,
-    StatisticsService
+    StatisticsService,
+    GameModelService
   ],
   bootstrap: [AppComponent]
 })
