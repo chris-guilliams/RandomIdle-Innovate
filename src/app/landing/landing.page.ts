@@ -16,7 +16,6 @@ export class LandingPage implements OnInit {
   private max = 3;
   private canvasHeight = window.screen.height - 44 - 56;
   private canvasWidth = window.screen.width;
-  private credsToAdd: number[] = [];
   public app: any;
   public currentCreds: number;
 
@@ -35,10 +34,21 @@ export class LandingPage implements OnInit {
     this.app.loader.add('../assets/sprites/coin/coin_spritesheet.json').load();
   }
 
-  createCoin(x: number, y: number, value: number) {
+  createCoin(value: number) {
     const coinSheet = this.app.loader.resources['../assets/sprites/coin/coin_spritesheet.json'].spritesheet;
     // create an animated sprite
     const animatedCoin = new PIXI.AnimatedSprite(coinSheet.animations.tile);
+    animatedCoin.interactive = true;
+    animatedCoin.buttonMode = true;
+    animatedCoin.hitArea = new PIXI.Rectangle(-40, -40, 80, 80);
+    animatedCoin.on('pointertap', async () => {
+      animatedCoin.destroy();
+      this.statisticsService.addCreds(value);
+      this.currentCreds = this.statisticsService.currentCreds;
+      await this.showEarningsToast(value);
+    });
+    const x = this.randomNumberService.getRandomNumber(15, this.canvasWidth - 15);
+    const y = this.randomNumberService.getRandomNumber(15, this.canvasHeight - 15);
     animatedCoin.x = x;
     animatedCoin.y = y;
     // set speed, start playback and add it to the stage
@@ -51,11 +61,10 @@ export class LandingPage implements OnInit {
     const earnings = this.randomNumberService.getRandomNumber(this.min, this.max);
     this.statisticsService.addCreds(earnings);
     this.currentCreds = this.statisticsService.currentCreds;
-    this.credsToAdd.push(earnings);
     await this.showEarningsToast(earnings);
-    const x = this.randomNumberService.getRandomNumber(0, this.canvasWidth);
-    const y = this.randomNumberService.getRandomNumber(0, this.canvasHeight);
-    this.createCoin(x, y, 50);
+
+    // TODO: You shouldn't be able to get your full earnings back
+    this.createCoin(Math.abs(earnings));
   }
 
   async presentEarningsToast(earnings: number) {
