@@ -14,11 +14,14 @@ export class UpgradeComponent implements OnInit {
 
   upgrade(upgrade: Upgrades) {
     switch (upgrade) {
-      case Upgrades.minGamble:
+      case Upgrades.maxGambleLoss:
           // increase minGamble
         break;
-      case Upgrades.maxGamble:
+      case Upgrades.maxGambleGain:
         // increas maxGamble
+        break;
+      case Upgrades.maxWager:
+        // increases maxWager
         break;
       default:
         throw new Error('Upgrade not found');

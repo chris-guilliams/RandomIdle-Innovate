@@ -13,20 +13,21 @@ declare var PIXI: any;
 })
 export class LandingPage implements OnInit {
   // TODO: Break into state service???
-  private min = -3;
-  private max = 3;
-
+  private min: Observable<number>;
+  private max: Observable<number>;
+  public currentCreds: Observable<number>;
   // TODO: Handle Android and iOS height seperately
   private canvasHeight = window.screen.height - 44 - 56;
   private canvasWidth = window.screen.width;
   public app: any;
-  public currentCreds: Observable<number>;
 
   constructor(
     private randomNumberService: RandomNumberService,
     private toastController: ToastController,
     private gameModelService: GameModelService) {
       this.currentCreds = this.gameModelService.creds$;
+      this.min = this.gameModelService.maxGambleLoss$;
+      this.max = this.gameModelService.maxGambleGain$;
   }
 
   ngOnInit() {
@@ -61,7 +62,7 @@ export class LandingPage implements OnInit {
 
   // TODO: Add cooldown between gambling
   async gamble() {
-    const earnings = this.randomNumberService.getRandomNumber(this.min, this.max);
+    const earnings = this.randomNumberService.getRandomNumber(this.gameModelService.maxGambleLoss, this.gameModelService.maxGambleGain);
     this.gameModelService.addCreds(earnings);
     if (earnings !== 0) {
       this.showEarningsToast(earnings);

@@ -1,4 +1,5 @@
 export const enum Upgrades {
-    minGamble,
-    maxGamble
+    maxGambleLoss,
+    maxGambleGain,
+    maxWager
 }
