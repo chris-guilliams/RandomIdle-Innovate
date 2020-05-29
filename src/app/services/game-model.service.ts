@@ -84,18 +84,16 @@ export class GameModelService {
   }
 
   private async save() {
-    console.log('save');
-    await this.storage.set('save', new SaveState(this.creds));
+    await this.storage.set('save', new SaveState(this.creds, this.maxGambleLoss, this.maxGambleGain, this.maxWager));
   }
 
   private async load() {
-    console.log('load');
-    
     const saveState: SaveState = await this.storage.get('save');
     if (saveState) {
       this.creds = saveState.creds;
-      console.log('set creds');
-      
+      this.maxGambleLoss = saveState.maxGambleLoss;
+      this.maxGambleGain = saveState.maxGambleGain;
+      this.maxWager = saveState.maxWager;
     }
   }
 }
