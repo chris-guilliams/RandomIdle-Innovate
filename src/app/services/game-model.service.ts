@@ -26,6 +26,7 @@ export class GameModelService {
   readonly maxWager$ = this._maxWager.asObservable();
 
   constructor(private storage: Storage) {
+    this.load();
     App.addListener('appStateChange', (state) => {
       if (!state.isActive) {
         // The app has become inactive. We should check if we have some work left to do, and, if so,
@@ -93,6 +94,8 @@ export class GameModelService {
     const saveState: SaveState = await this.storage.get('save');
     if (saveState) {
       this.creds = saveState.creds;
+      console.log('set creds');
+      
     }
   }
 }
