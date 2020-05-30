@@ -1,0 +1,20 @@
+ion-item {
+    ion-grid.upgrade-info {
+        width: 40%;
+
+        .upgrade-title {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .upgrade-description {
+            font-size: 11px;
+        }
+    }
+
+    ion-grid.upgrade-controls {
+        h1.controls-number {
+            margin: 0;
+        }
+    }
+}

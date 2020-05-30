@@ -12,10 +12,10 @@ declare var PIXI: any;
   styleUrls: ['./landing.page.scss']
 })
 export class LandingPage implements OnInit {
-  // TODO: Break into state service???
   private min: Observable<number>;
   private max: Observable<number>;
   public currentCreds: Observable<number>;
+
   // TODO: Handle Android and iOS height seperately
   private canvasHeight = window.screen.height - 44 - 56;
   private canvasWidth = window.screen.width;
