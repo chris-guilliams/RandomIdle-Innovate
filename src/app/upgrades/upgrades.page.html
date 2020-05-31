@@ -12,10 +12,20 @@
 
 
 <ion-content id="upgrades-page">
-  <ion-list>
-    <app-upgrade></app-upgrade>
-    <app-upgrade></app-upgrade>
-    <app-upgrade></app-upgrade>
-    <app-upgrade></app-upgrade>
+  <ion-list id="upgrades-list" lines="none">
+    <!-- <ion-item-divider>
+      <ion-label>
+        Section A
+      </ion-label>
+    </ion-item-divider> -->
+    <app-upgrade
+      [upgradeType]="upgrades.maxGambleLoss">
+    </app-upgrade>
+    <app-upgrade
+      [upgradeType]="upgrades.maxGambleGain">
+    </app-upgrade>
+    <app-upgrade
+      [upgradeType]="upgrades.maxWager">
+    </app-upgrade>
   </ion-list>
 </ion-content>

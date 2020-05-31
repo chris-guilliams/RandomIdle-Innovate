@@ -1,25 +1,14 @@
-<ion-item>
-  <ion-grid class="upgrade-info" fixed>
+<ion-item color="dark-tint">
+  <ion-grid class="upgrade-info">
     <ion-row>
-      <h2 class="upgrade-title">Max loss</h2>
+      <h2 class="upgrade-title">Max loss - 40 creds</h2>
     </ion-row>
     <ion-row class="upgrade-description">
       Reduce the amount of money you can lose gambling
     </ion-row>
   </ion-grid>
-  <ion-grid class="upgrade-controls" slot="end" fixed>
-    <ion-row class="ion-justify-content-end">
-      <ion-col class="ion-align-self-center" size="auto">
-        <ion-icon name="remove-circle"></ion-icon>
-      </ion-col>
-      <ion-col class="ion-align-self-center" size="auto">
-        <ion-text color="primary">
-          <h1 class="controls-number">4</h1>
-        </ion-text>
-      </ion-col>
-      <ion-col class="ion-align-self-center" size="auto">
-        <ion-icon name="add-circle"></ion-icon>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-button expand="block" strong (click)="upgrade()" 
+    [disabled]="canUpgrade()">
+    Purchase
+  </ion-button>
 </ion-item>

@@ -51,12 +51,8 @@ export class GameModelService {
     this._creds.next(val);
   }
 
-  addCreds(val: number) {
-    this._creds.next(this._creds.getValue() + val);
-  }
-
-  removeCreds(val: number) {
-    this._creds.next(this._creds.getValue() - val);
+  updateCreds(delta: number) {
+    this._creds.next(this._creds.getValue() + delta);
   }
 
   get maxGambleLoss(): number {
@@ -67,12 +63,20 @@ export class GameModelService {
     this._maxGambleLoss.next(val);
   }
 
+  updateMaxGambleLoss(delta: number) {
+    this._maxGambleLoss.next(this._maxGambleLoss.getValue() + delta);
+  }
+
   get maxGambleGain(): number {
     return this._maxGambleGain.getValue();
   }
 
   set maxGambleGain(val: number) {
     this._maxGambleGain.next(val);
+  }
+
+  updateMaxGambleGain(delta: number) {
+    this._maxGambleGain.next(this._maxGambleGain.getValue() + delta);
   }
 
   get maxWager(): number {
@@ -83,6 +87,9 @@ export class GameModelService {
     this._maxWager.next(val);
   }
 
+  updateMaxWager(delta: number) {
+    this._maxWager.next(this._maxWager.getValue() + delta);
+  }
   private async save() {
     await this.storage.set('save', new SaveState(this.creds, this.maxGambleLoss, this.maxGambleGain, this.maxWager));
   }

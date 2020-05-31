@@ -47,7 +47,7 @@ export class LandingPage implements OnInit {
     animatedCoin.hitArea = new PIXI.Rectangle(-40, -40, 80, 80);
     animatedCoin.on('pointertap', async () => {
       animatedCoin.destroy();
-      this.gameModelService.addCreds(value);
+      this.gameModelService.updateCreds(value);
       await this.showEarningsToast(value);
     });
     const x = this.randomNumberService.getRandomNumber(15, this.canvasWidth - 15);
@@ -63,7 +63,7 @@ export class LandingPage implements OnInit {
   // TODO: Add cooldown between gambling
   async gamble() {
     const earnings = this.randomNumberService.getRandomNumber(this.gameModelService.maxGambleLoss, this.gameModelService.maxGambleGain);
-    this.gameModelService.addCreds(earnings);
+    this.gameModelService.updateCreds(earnings);
     if (earnings !== 0) {
       this.showEarningsToast(earnings);
     }
