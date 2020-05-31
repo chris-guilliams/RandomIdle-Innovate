@@ -1,0 +1,32 @@
+{
+    "maxGambleLoss": [
+        { "delta": 1, "cost": 25 },
+        { "delta": 1, "cost": 75 },
+        { "delta": 1, "cost": 25 },
+        { "delta": 1, "cost": 25 },
+        { "delta": 1, "cost": 25 },
+        { "delta": 1, "cost": 25 },
+        { "delta": 1, "cost": 25 },
+        { "delta": 1, "cost": 25 }
+    ],
+    "maxGambleGain": [
+        { "delta": 1, "cost": 25 },
+        { "delta": 1, "cost": 75 },
+        { "delta": 1, "cost": 25 },
+        { "delta": 1, "cost": 25 },
+        { "delta": 1, "cost": 25 },
+        { "delta": 1, "cost": 25 },
+        { "delta": 1, "cost": 25 },
+        { "delta": 1, "cost": 25 }
+    ],
+    "maxWager": [
+        { "delta": 1, "cost": 25 },
+        { "delta": 1, "cost": 75 },
+        { "delta": 1, "cost": 25 },
+        { "delta": 1, "cost": 25 },
+        { "delta": 1, "cost": 25 },
+        { "delta": 1, "cost": 25 },
+        { "delta": 1, "cost": 25 },
+        { "delta": 1, "cost": 25 }
+    ]
+}

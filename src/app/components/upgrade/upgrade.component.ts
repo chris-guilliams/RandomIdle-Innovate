@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Upgrades } from '../../enums/upgrades';
 import { GameModelService } from 'src/app/services/game-model.service';
 import { Observable } from 'rxjs';
+import { UpgradesService } from 'src/app/services/upgrades.service';
 
 @Component({
   selector: 'app-upgrade',
@@ -12,64 +13,56 @@ export class UpgradeComponent implements OnInit {
   @Input() upgradeType: Upgrades;
   public currentCreds: Observable<number>;
 
-  constructor(private gameModelService: GameModelService) {
+  constructor(
+    private gameModelService: GameModelService,
+    private upgradesService: UpgradesService) {
     this.currentCreds = this.gameModelService.creds$;
   }
 
   ngOnInit() {}
 
   canUpgrade(): boolean {
+    // get upgrade cost
     switch (this.upgradeType) {
       case Upgrades.maxGambleLoss:
-        return this.upgradeMaxGambleLoss(1, 25);
+        return this.upgradesService.getUpgradeCost(Upgrades.maxGambleLoss, 0) <= this.gameModelService.creds;
       case Upgrades.maxGambleGain:
-        return this.upgradeMaxGambleGain(1, 25);
+        return this.upgradesService.getUpgradeCost(Upgrades.maxGambleGain, 0) <= this.gameModelService.creds;
       case Upgrades.maxWager:
-        return this.upgradeMaxWager(1, 25);
+        return this.upgradesService.getUpgradeCost(Upgrades.maxWager, 0) <= this.gameModelService.creds;
       default:
         throw new Error('Upgrade not found');
     }
   }
 
-  upgrade(): boolean {
+  upgrade() {
     switch (this.upgradeType) {
       case Upgrades.maxGambleLoss:
-        return this.upgradeMaxGambleLoss(1, 25, true);
+        this.upgradeMaxGambleLoss(1, 25);
+        break;
       case Upgrades.maxGambleGain:
-        return this.upgradeMaxGambleGain(1, 25, true);
+        this.upgradeMaxGambleGain(1, 25);
+        break;
       case Upgrades.maxWager:
-        return this.upgradeMaxWager(1, 25, true);
+        this.upgradeMaxWager(1, 25);
+        break;
       default:
         throw new Error('Upgrade not found');
     }
   }
 
-  private upgradeMaxWager(delta: number, cost: number, purchase: boolean = false): boolean {
-    if (this.gameModelService.creds >= cost && purchase) {
-      this.gameModelService.updateMaxWager(delta);
-      console.log('upgrade');
-      
-      return true;
-    } else {
-      return this.gameModelService.creds >= cost ? false : true;
-    }
+  private upgradeMaxWager(delta: number, cost: number) {
+    this.gameModelService.updateMaxWager(delta);
+    this.gameModelService.updateCreds(-cost);
   }
 
-  private upgradeMaxGambleGain(delta: number, cost: number, purchase: boolean = false): boolean {
-    if (this.gameModelService.creds >= cost && purchase) {
-      this.gameModelService.updateMaxGambleGain(delta);
-      return true;
-    } else {
-      return this.gameModelService.creds >= cost ? false : true;
-    }
+  private upgradeMaxGambleGain(delta: number, cost: number) {
+    this.gameModelService.updateMaxGambleGain(delta);
+    this.gameModelService.updateCreds(-cost);
   }
 
-  private upgradeMaxGambleLoss(delta: number, cost: number, purchase: boolean = false): boolean {
-    if (this.gameModelService.creds >= cost && purchase) {
-      this.gameModelService.updateMaxGambleLoss(delta);
-      return true;
-    } else {
-      return this.gameModelService.creds >= cost ? false : true;
-    }
+  private upgradeMaxGambleLoss(delta: number, cost: number) {
+    this.gameModelService.updateMaxGambleLoss(delta);
+    this.gameModelService.updateCreds(-cost);
   }
 }

@@ -7,8 +7,9 @@
       Reduce the amount of money you can lose gambling
     </ion-row>
   </ion-grid>
-  <ion-button expand="block" strong (click)="upgrade()" 
-    [disabled]="canUpgrade()">
+  <ion-button expand="block" strong 
+    (click)="upgrade()" 
+    [disabled]="!canUpgrade()">
     Purchase
   </ion-button>
 </ion-item>
