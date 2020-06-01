@@ -11,6 +11,10 @@ import { UpgradesService } from 'src/app/services/upgrades.service';
 })
 export class UpgradeComponent implements OnInit {
   @Input() upgradeType: Upgrades;
+  @Input() title: string;
+  @Input() description: string;
+
+  public rank = 0;
   public currentCreds: Observable<number>;
 
   constructor(

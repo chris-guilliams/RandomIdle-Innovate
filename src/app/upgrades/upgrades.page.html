@@ -19,13 +19,19 @@
       </ion-label>
     </ion-item-divider> -->
     <app-upgrade
-      [upgradeType]="upgrades.maxGambleLoss">
+      [upgradeType]="upgrades.maxGambleLoss"
+      title="Gamble Loss"
+      description="The max amount of credits you could lose while gambling">
     </app-upgrade>
     <app-upgrade
-      [upgradeType]="upgrades.maxGambleGain">
+      [upgradeType]="upgrades.maxGambleGain"
+      title="Gamble Gain"
+      description="The max amount of credits you could gain while gambling">
     </app-upgrade>
     <app-upgrade
-      [upgradeType]="upgrades.maxWager">
+      [upgradeType]="upgrades.maxWager"
+      title="Max Wager"
+      description="The max amount of credits you can wager at a single time">
     </app-upgrade>
   </ion-list>
 </ion-content>
